@@ -1,6 +1,6 @@
 ﻿//Question 1: Write an funciton that finds the largest and smallest numbers in an array 
 using System.Text;
-using System.Timers;
+using System.Text.RegularExpressions;
 
 static (int min, int max) FindMinMax(int[] numbers)
 {
@@ -103,6 +103,23 @@ static bool isAnagram(string s1, string s2)
     return true;
 }
 //Question 4: Write a RegEx to match an Australian mobile phone
+static bool IsValidAustralianMobile(string phoneNumber)
+{
+    if (string.IsNullOrWhiteSpace(phoneNumber))
+        return false;
+    // Matches:
+    // 04XXXXXXXX
+    // +614XXXXXXXX
+    // with optional spaces or hyphens
+
+    // ^                Start of string
+    // (?:\+61|0)        Match either "+61" (international format) OR "0" (local format)
+    // 4                 Mobile numbers must start with '4' after prefix
+    // (?:[\s-]?\d){8}  Match 8 digits, each optionally preceded by a space or hyphen
+    // $                 End of string
+    string pattern = @"^(?:\+61|0)4(?:[\s-]?\d){8}$";
+    return Regex.IsMatch(phoneNumber, pattern);
+}
 
 Console.WriteLine("Hello, World!");
 
@@ -133,5 +150,8 @@ Console.WriteLine($"{anagramString}");
 var nonAnagramString = isAnagram("hello","world");
 Console.WriteLine($"Check Anagram for Strings 'hello' and 'world'");
 Console.WriteLine($"{nonAnagramString}");
-
-
+//Question 4: Example
+Console.WriteLine($"Check if Australian phone: +61 412 345 678");
+Console.WriteLine(IsValidAustralianMobile("+61 412 345 678"));
+Console.WriteLine($"Check if Australian phone: +61 0312345678");
+Console.WriteLine(IsValidAustralianMobile("+61 0312345678"));  
