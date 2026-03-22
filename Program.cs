@@ -71,7 +71,37 @@ static string RemoveDuplicates_NoExtraSpace(string input)
 //2a is best becuase O(n) time, Keeps original order, Clean and efficient
 
 //Question 3: Write a function that checks if 2 strings are anagrams.
-
+static bool isAnagram(string s1, string s2)
+{
+    //error handling
+    if (s1 == null || s2 == null) return false;
+    // If lengths are different, they cannot be anagrams
+    if (s1.Length != s2.Length) return false;
+    // Dictionary to store character frequency counts
+    var counts = new Dictionary<char, int>();
+    // Count each character in the first string
+    foreach (char c in s1.ToLower())
+    {
+        // If character not yet seen, initialize count
+        if (!counts.ContainsKey(c))
+            counts[c] = 0;
+        // Increment count for this character
+        counts[c]++;
+    }
+    // Subtract counts using the second string
+    foreach (char c in s2.ToLower())
+    {
+        // If character not found, strings are not anagrams
+        if (!counts.ContainsKey(c))
+            return false;
+        // Decrease count for this characte
+        counts[c]--;
+        // If count goes negative, s2 has extra occurrences
+        if (counts[c] < 0)
+            return false;
+    }
+    return true;
+}
 //Question 4: Write a RegEx to match an Australian mobile phone
 
 Console.WriteLine("Hello, World!");
@@ -94,6 +124,14 @@ Console.WriteLine($"{string2}");
 var string3 = RemoveDuplicates_NoExtraSpace(inputString);
 Console.WriteLine($"RemoveDuplicates_NoExtraSpace");
 Console.WriteLine($"{string3}");
-
+//Question 3: Example
+//true
+var anagramString = isAnagram("note","tone");
+Console.WriteLine($"Check Anagram for Strings 'note' and 'tone'");
+Console.WriteLine($"{anagramString}");
+//false
+var nonAnagramString = isAnagram("hello","world");
+Console.WriteLine($"Check Anagram for Strings 'hello' and 'world'");
+Console.WriteLine($"{nonAnagramString}");
 
 
