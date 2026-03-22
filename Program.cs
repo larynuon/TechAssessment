@@ -151,7 +151,11 @@ var nonAnagramString = isAnagram("hello","world");
 Console.WriteLine($"Check Anagram for Strings 'hello' and 'world'");
 Console.WriteLine($"{nonAnagramString}");
 //Question 4: Example
-Console.WriteLine($"Check if Australian phone: +61 412 345 678");
-Console.WriteLine(IsValidAustralianMobile("+61 412 345 678"));
-Console.WriteLine($"Check if Australian phone: +61 0312345678");
-Console.WriteLine(IsValidAustralianMobile("+61 0312345678"));  
+Console.WriteLine($"Check if Australian phone: +61412 345 678");
+Console.WriteLine(IsValidAustralianMobile("+61412 345 678"));
+Console.WriteLine($"Check if Australian phone: 0412 345 678");
+Console.WriteLine(IsValidAustralianMobile("0412 345 678"));
+Console.WriteLine($"Check if Australian phone: +61312 345 678");
+Console.WriteLine(IsValidAustralianMobile("+61312 345 678"));
+Console.WriteLine($"Check if Australian phone: 0312 345 678");
+Console.WriteLine(IsValidAustralianMobile("0312 345 678"));
